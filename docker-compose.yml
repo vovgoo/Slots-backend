@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  spring:
+    container_name: backend-slots
+    image: slots
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://database-slots/slots
+      - SPRING_REDIS_HOST=redis-slots
+    networks:
+      - backend
+
+  postgres:
+    image: postgres:alpine
+    container_name: database-slots
+    environment:
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: slots
+    ports:
+      - "5438:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - backend
+
+  redis:
+    image: redis:latest
+    container_name: redis-slots
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+
+networks:
+  backend:
