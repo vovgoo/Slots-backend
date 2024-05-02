@@ -16,7 +16,7 @@ public class Message {
     private Long id;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yygiyy-MM-dd HH:mm:ss")
     private Date messageDate;
 
     private String description;
