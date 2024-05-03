@@ -1,6 +1,14 @@
 version: '3.8'
 
 services:
+  react:
+    container_name: frontend-slots
+    image: slots-frontend
+    ports:
+      - "3000:80"
+    networks:
+      - frontend
+
   spring:
     container_name: backend-slots
     image: slots
@@ -11,6 +19,7 @@ services:
       - SPRING_REDIS_HOST=redis-slots
     networks:
       - backend
+      - frontend
 
   postgres:
     image: postgres:alpine
@@ -35,3 +44,4 @@ services:
 
 networks:
   backend:
+  frontend:
